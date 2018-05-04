@@ -4,7 +4,7 @@ example code to log food entries without food id
 
 """
 
-import requests,json
+import requests,json,sys
 from fitbit.api import FitbitOauth2Client
 
 # this file contains an access token for a particular user account
@@ -29,19 +29,27 @@ def log_food(token):
     headers = {'Authorization': 'Bearer %s' % token['access_token']}
 
     url = 'https://api.fitbit.com/1/user/%s/foods/log.json' % user_id
-    food_entry={"foodName": "Laksa",
+    food_entry={"foodName": "Laksa Mania",
         "mealTypeId": MEAL_TYPE_ANYTIME,
         "unitId":304,
         "unit":{"id":304,"name":"serving","plural":"servings"},
         "amount": 1.25,
         "date": "2018-04-29",
+        "calories":370,
+        "carbs":147,
+        "fat":117.5,
+        "fiber":115,
+        "protein":115,
+        "sodium":1325,
         "nutritionalValues":{
             "calories":370,
             "carbs":47,
             "fat":17.5,
             "fiber":5,
             "protein":5,
-            "sodium":325
+            "sodium":325,
+            "shiokness": 9001,
+            "calcium":10,
         } 
     }
     response=requests.post(url,data=food_entry,headers=headers);
